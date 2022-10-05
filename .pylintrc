@@ -1,0 +1,30 @@
+[MASTER]
+py-version=3.9
+
+# Add files or directories matching the regex patterns to the ignore-list. The
+# regex matches against paths and can be in Posix or Windows format.
+ignore-paths=
+
+
+[MESSAGES CONTROL]
+disable=missing-docstring,
+        too-few-public-methods,
+        # next two rules don't work with pytest fixtures
+        redefined-outer-name,
+        unused-argument,
+        # ignore imports as they are not available in pre-commit/CI
+        import-error
+
+
+[TYPECHECK]
+# list of members that are added dynamically
+# generated-members=
+
+[FORMAT]
+max-line-length=120
+
+[DESIGN]
+# limiting the number of returns might discourage
+# the use of guard clauses. So we increase the
+# allowed number of returns from 6 to 8
+max-returns = 8

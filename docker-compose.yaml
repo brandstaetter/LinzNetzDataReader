@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/application/Dockerfile
+      network: host
+      target: app
+    image: example-application
+    ports:
+      - '8080:8080'
+    environment:
+      - WEB_CONCURRENCY=1
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+  dev:
+    build:
+      context: .
+      dockerfile: ./docker/application/Dockerfile
+      network: host
+      target: dev
+    image: example-application-dev
+  pre-commit:
+    build:
+      context: .
+      dockerfile: ./docker/pre-commit/Dockerfile
+      network: host
+    image: example-application-pre-commmit
