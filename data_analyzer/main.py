@@ -7,12 +7,14 @@ import aiofiles
 import matplotlib.pyplot as plt
 import pandas as pd
 import uvicorn
+from api.general_pages.route_frontend import general_pages_router
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from util import csv_reader
 
 app = FastAPI()
+app.include_router(general_pages_router)
 
 
 class Message(BaseModel):
@@ -50,7 +52,7 @@ async def create_upload_file(file: UploadFile = File(...)) -> FileResponse:
     return FileResponse(result_filepath)
 
 
-@app.post("/upload-files")
+@app.post("/api/upload-files")
 async def create_upload_files(files: List[UploadFile] = File(...)) -> Union[Message, FileResponse]:
     # OPENTODO check for unique filenames
     file_count: int = len(files)
