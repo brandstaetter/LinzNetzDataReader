@@ -1,0 +1,18 @@
+version: "3.9"
+
+volumes:
+  localpostgresdata:
+
+
+services:
+  postgres:
+    image: postgres:12.5
+    environment:
+      POSTGRES_DB: dataanalyzer
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+    volumes:
+      - localpostgresdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: on-failure

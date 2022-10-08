@@ -1,4 +1,5 @@
 import pandas as pd
+from api.table_definition import CONSUMPTION, ENDDATE, FALLBACK, STARTDATE
 from numpy import NaN
 
 
@@ -9,10 +10,10 @@ def parse_float(value_string: str) -> float:
 def parse(destination_file_path: str) -> pd.DataFrame:
     frame = pd.read_csv(
         destination_file_path,
-        parse_dates=["Datum von", "Datum bis"],
+        parse_dates=[STARTDATE, ENDDATE],
         dayfirst=True,
         sep=";",
-        converters={"Verbrauch in kWh": parse_float, "Ersatzwert": parse_float},
-        index_col="Datum von",
+        converters={CONSUMPTION: parse_float, FALLBACK: parse_float},
+        index_col=STARTDATE,
     )
     return frame
