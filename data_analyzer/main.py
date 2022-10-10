@@ -45,9 +45,7 @@ def _is_persist_csv(filename: str, csv_file_path: str) -> bool:
             logging.debug("No previous data found, creating new table")
             frame = new_frame
             success = True
-        elif (table_name == QH_TABLE_NAME and not new_frame[ENDDATE].isin(original_frame[ENDDATE].values).any()) or (
-            table_name == D_TABLE_NAME and not pd.Series(new_frame.index.values).isin(original_frame.index.values).any()
-        ):
+        elif not pd.Series(new_frame.index.values).isin(original_frame.index.values).any():
             logging.debug("Adding new data to table")
             # using concat instead of just apending to keep data sorted
             frame = pd.concat([original_frame, new_frame], sort=True, join="inner")
@@ -149,7 +147,7 @@ async def qh_graph(
         elif lower == "" and upper != "":
             frame = frame.loc[:upper]  # type: ignore [misc]
 
-        width = frame.size / 30
+        width = max(frame.size / 30 if source == "d" else frame.size / 100, 10)
         height = 5
 
         if aggregate in ["h", "d", "w", "m"]:

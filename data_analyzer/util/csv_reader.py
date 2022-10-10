@@ -19,9 +19,9 @@ def parse(destination_file_path: str, table_name: str) -> pd.DataFrame:
             dayfirst=True,
             sep=";",
             converters={CONSUMPTION: parse_float, FALLBACK: parse_float, CONSUMPTION_ALT: parse_float},
-            index_col=STARTDATE,
         )
         frame.rename(columns={STARTDATE: DATE}, inplace=True)
+        frame.set_index(DATE, inplace=True)
     elif table_name == D_TABLE_NAME:
         frame = pd.read_csv(
             destination_file_path,
