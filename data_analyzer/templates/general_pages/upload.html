@@ -1,0 +1,24 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %} 
+  <title>LinzNetz DataAnalyzer - Upload</title>
+{% endblock %} 
+
+{% block content %} 
+  <div class="container">
+    <h1 class="display-3">LinzNetz DataAnalyzer</h1>
+    <h2 class="display-4">Upload</h2>
+    <div class="mb-3">
+      <form action="/api/upload-files" enctype="multipart/form-data" method="post">
+        <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">Select the files to upload</label>
+          <input class="form-control" id="formFileMultiple" name="files" type="file" multiple accept=".csv" aria-describedby="fileHelp"/>
+          <div id="fileHelp" class="form-text">Please upload the quarterhourly or daily report csv files</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+{% endblock %} 
