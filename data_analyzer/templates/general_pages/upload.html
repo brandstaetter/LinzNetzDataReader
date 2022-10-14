@@ -10,7 +10,7 @@
     <h1 class="display-3">LinzNetz DataAnalyzer</h1>
     <h2 class="display-4">Upload</h2>
     <div class="mb-3">
-      <form action="/api/upload-files" enctype="multipart/form-data" method="post">
+      <form action="/do/upload-files" enctype="multipart/form-data" method="post">
         <div class="mb-3">
           <label for="formFileMultiple" class="form-label">Select the files to upload</label>
           <input class="form-control" id="formFileMultiple" name="files" type="file" multiple accept=".csv" aria-describedby="fileHelp"/>
@@ -19,6 +19,33 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
+    {% if result %}
+      {% if success %}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+      {% endif %}
+      {% if not success %}
+      <div class="alert alert-danger" role="alert">
+      {{ message }} <br/>
+      Problems: 
+      <ul>
+        {% for filename in problems %}
+        <li>{{ filename }}</li>
+        {% endfor %}
+      </ul>
+      </div>
+      {% if filenames|length %}
+      <div class="alert alert-success" role="alert">
+        Processed successfully:<ul>
+          {% for filename in filenames %}
+          <li>{{ filename }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
   </div>
   
 {% endblock %} 

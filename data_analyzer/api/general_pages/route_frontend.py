@@ -10,9 +10,9 @@ general_pages_router = APIRouter()
 
 @general_pages_router.get("/")
 async def home(request: Request) -> Response:
-    return templates.TemplateResponse("general_pages/homepage.html", {"request": request})
+    return templates.TemplateResponse("general_pages/homepage.html", context={"request": request})
 
 
 @general_pages_router.get("/upload")
 async def upload(request: Request) -> Response:
-    return templates.TemplateResponse("general_pages/upload.html", {"request": request})
+    return templates.TemplateResponse("general_pages/upload.html", context={"request": request, "result": False})

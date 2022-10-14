@@ -18,5 +18,5 @@ app.mount("/static", StaticFiles(directory="data_analyzer/static"), name="static
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, filename="data_analyzer.log")
+    logging.basicConfig(level=logging.DEBUG, filename="data_analyzer.log")
     uvicorn.run(app, host="127.0.0.1", port=8005)
