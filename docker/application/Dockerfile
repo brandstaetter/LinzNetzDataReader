@@ -83,4 +83,4 @@ COPY --from=dev --chown=ouruser:ourgroup /app/data_analyzer/dist/*.whl dist/
 RUN find dist -type f | xargs pip install --disable-pip-version-check --no-cache --no-deps
 
 EXPOSE 8080
-CMD ["uvicorn", "example_application.main:app", "--host",  "0.0.0.0", "--port", "8080", "--no-access-log"]
+CMD ["uvicorn", "data_analyzer.main:app", "--host",  "0.0.0.0", "--port", "8080", "--no-access-log"]

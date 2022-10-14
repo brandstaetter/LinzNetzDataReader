@@ -69,7 +69,7 @@ async def do_upload_files(request: Request, files: List[UploadFile] = File(...))
             "success": success,
             "filenames": [k for k, v in result.items() if v],
             "problems": [k for k, v in result.items() if not v],
-            "message": "Files processed successfully." if success else "There were some problems!",
+            "message": "Files processed successfully." if success else "Some files were excluded as duplicate data.",
         },
     )
 

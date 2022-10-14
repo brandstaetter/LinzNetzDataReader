@@ -16,7 +16,7 @@
           <input class="form-control" id="formFileMultiple" name="files" type="file" multiple accept=".csv" aria-describedby="fileHelp"/>
           <div id="fileHelp" class="form-text">Please upload the quarterhourly or daily report csv files</div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="this.form.submit(); this.disabled=true;">Submit</button>
       </form>
     </div>
     {% if result %}
@@ -26,9 +26,8 @@
       </div>
       {% endif %}
       {% if not success %}
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-warning" role="alert">
       {{ message }} <br/>
-      Problems: 
       <ul>
         {% for filename in problems %}
         <li>{{ filename }}</li>

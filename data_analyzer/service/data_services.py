@@ -18,13 +18,13 @@ def is_persist_csv(filename: str, csv_file_path: str) -> bool:
             logging.debug("No previous data found, creating new table")
             frame = new_frame
             success = True
-        elif not pd.Series(new_frame.index.values).isin(original_frame.index.values).any():
+        elif not pd.Series(new_frame.index.values).isin(original_frame.index.values).all():
             logging.debug("Adding new data to table")
-            # using concat instead of just apending to keep data sorted
-            frame = pd.concat([original_frame, new_frame], sort=True, join="inner")
+            # using concat instead of just appending to keep data sorted
+            frame = pd.concat([original_frame, new_frame], join="inner").drop_duplicates()
             success = True
         else:
-            logging.warning("Duplicate/overlapping dataset in %s uploaded! Will not be stored.", filename)
+            logging.warning("Duplicate dataset in %s uploaded! Will not be stored.", filename)
             frame = original_frame
         logging.debug("Writing table with the following columns: %s", frame.dtypes)
         frame.to_sql(table_name, con, if_exists="replace")
