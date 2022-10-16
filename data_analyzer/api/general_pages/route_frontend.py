@@ -16,3 +16,33 @@ async def home(request: Request) -> Response:
 @general_pages_router.get("/upload")
 async def upload(request: Request) -> Response:
     return templates.TemplateResponse("general_pages/upload.html", context={"request": request, "result": False})
+
+
+@general_pages_router.get("/graph-qh")
+async def graph_qh(request: Request, aggregate: str = "", step: int = 4, lower: str = "", upper: str = "") -> Response:
+    return templates.TemplateResponse(
+        "general_pages/graph.html",
+        context={
+            "request": request,
+            "source": "qh",
+            "aggregate": aggregate,
+            "step": step,
+            "lower": lower,
+            "upper": upper,
+        },
+    )
+
+
+@general_pages_router.get("/graph-d")
+async def graph_h(request: Request, aggregate: str = "", step: int = 4, lower: str = "", upper: str = "") -> Response:
+    return templates.TemplateResponse(
+        "general_pages/graph.html",
+        context={
+            "request": request,
+            "source": "d",
+            "aggregate": aggregate,
+            "step": step,
+            "lower": lower,
+            "upper": upper,
+        },
+    )

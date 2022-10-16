@@ -1,0 +1,39 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %} 
+  <title>LinzNetz DataAnalyzer - Graphs</title>
+{% endblock %} 
+
+{% block content %} 
+  <div class="container">
+    <h1 class="display-3">LinzNetz DataAnalyzer</h1>
+    <h2 class="display-4">{% if source == "d" %}Graph - daily data {% else %} Graph - quarterhourly data{% endif %}</h2>
+    <div class="container">
+      <div id="imageRow" class="row">
+        <div class="col-md">
+          <div id="imgContainer" visible="false" class="d-flex w-100" style="height:520px;overflow:auto" onscroll="">
+            <div class="spinner-border align-self-center" role="status" style="z-index:1;position:absolute">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <img id="graph" src="/api/graph?source={{source}}&aggregate={{ aggregate }}&step={{ step }}&lower={{ lower }}&upper={{ upper }}"
+              class="imgDocument align-self-start clear" alt="graph" style="z-index:2;position:relative" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %} 
+
+{% block scripts %}
+<script type = "text/javascript">
+  var imgContainerElement = document.getElementById('imgContainer')
+  var imgElement = document.getElementById('graph')
+  
+  function scrollCenter(){
+    imgContainerElement.scrollBy((imgElement.width-imgContainerElement.offsetWidth)/2, 0)
+  }
+
+  imgElement.onload = scrollCenter;
+</script>
+{% endblock %}
