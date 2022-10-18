@@ -10,15 +10,13 @@
     <h1 class="display-3">LinzNetz DataAnalyzer</h1>
     <h2 class="display-4">{% if source == "d" %}Graph - daily data {% else %} Graph - quarterhourly data{% endif %}</h2>
     <div class="container">
-      <div id="imageRow" class="row">
-        <div class="col-md-12">
-          <div id="imgContainer" visible="false" class="d-flex w-100" style="height:520px;overflow:auto" onscroll="">
-            <div class="spinner-border align-self-center" role="status" style="z-index:1;position:absolute">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-            <img id="graph" src="/api/graph?source={{source}}&aggregate={{ aggregate }}&step={{ step }}&lower={{ lower }}&upper={{ upper }}"
-              class="imgDocument clear" alt="graph" style="z-index:2;position:relative" />
-          </div>
+      <div id="imageRow" class="row-mb-4 align-items-center" style="height:520px">
+        <div class="spinner-border m-5" role="status" style="z-index:1;position:absolute;">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="col-md-12 align-self-center d-flex overflow-auto" id="imgContainer" style="z-index:2;position:relative">
+          <img id="graph" src="/api/graph?source={{source}}&aggregate={{ aggregate }}&step={{ step }}&lower={{ lower }}&upper={{ upper }}"
+            class="imgDocument clear" alt="graph"/>
         </div>
       </div>
     </div>
