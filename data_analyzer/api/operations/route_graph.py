@@ -68,7 +68,7 @@ def _persist_plot(step: int, frame: DataFrame, result_filepath: str, width: floa
     # Create appropriate ticks using matplotlib date tick locators and formatters
     if source == "d":
         axes.xaxis.set_major_locator(mdates.MonthLocator())
-        axes.xaxis.set_minor_locator(mdates.MonthLocator(bymonthday=np.arange(0, 31, step=step)))
+        axes.xaxis.set_minor_locator(mdates.DayLocator(interval=step))
         axes.xaxis.set_major_formatter(mdates.DateFormatter("%d\n%b %y"))
         axes.xaxis.set_minor_formatter(mdates.DateFormatter("%d"))
         axes.figure.autofmt_xdate(rotation=0, ha="center")
@@ -78,12 +78,14 @@ def _persist_plot(step: int, frame: DataFrame, result_filepath: str, width: floa
 
     elif source == "qh":
         axes.xaxis.set_major_locator(mdates.DayLocator())
-        axes.xaxis.set_minor_locator(mdates.HourLocator(byhour=np.arange(0, 24, step=step)))
+        axes.xaxis.set_minor_locator(mdates.HourLocator(interval=step))
         axes.xaxis.set_major_formatter(mdates.DateFormatter("\n%d %b %y"))
         axes.xaxis.set_minor_formatter(mdates.DateFormatter("%H:%M"))
         axes.figure.autofmt_xdate(rotation=45, ha="right", which="minor")
         axes.figure.autofmt_xdate(rotation=0, ha="center", which="major")
         axes.xaxis.set_tick_params(which="major", pad=20)
+        axes.grid(visible=True, axis="x", which="minor", linestyle="--", color="gray")
+        axes.grid(visible=True, axis="x", which="major", linestyle="-", color="gray")
 
     # Additional formatting
     title = "Verbrauch"
