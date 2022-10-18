@@ -42,7 +42,7 @@ async def get_graph(source: str, aggregate: str = "", step: int = 4, lower: str 
         height = 5.0
 
         if aggregate in ["h", "d", "w", "m"]:
-            frame = frame.resample(aggregate).sum()
+            frame = frame.resample(aggregate).sum(numeric_only=True)
         _persist_plot(step, frame, result_filepath, width, height)
         return FileResponse(result_filepath)
     raise FileNotFoundError("Data not found, please upload.")
@@ -63,8 +63,10 @@ def _persist_plot(step: int, frame: DataFrame, result_filepath: str, width: floa
     # Create appropriate ticks using matplotlib date tick locators and formatters
     axes.xaxis.set_major_locator(mdates.MonthLocator())
     axes.xaxis.set_minor_locator(mdates.MonthLocator(bymonthday=np.arange(0, 31, step=step)))
-    axes.xaxis.set_major_formatter(mdates.DateFormatter("\n%b"))
+    axes.xaxis.set_major_formatter(mdates.DateFormatter("\n%b %y"))
     axes.xaxis.set_minor_formatter(mdates.DateFormatter("%d"))
+
+    axes.grid(visible=True, axis="y", which="major")
 
     # Additional formatting
     axes.figure.autofmt_xdate(rotation=0, ha="center")

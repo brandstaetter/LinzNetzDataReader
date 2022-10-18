@@ -11,15 +11,47 @@
     <h2 class="display-4">{% if source == "d" %}Graph - daily data {% else %} Graph - quarterhourly data{% endif %}</h2>
     <div class="container">
       <div id="imageRow" class="row">
-        <div class="col-md">
+        <div class="col-md-12">
           <div id="imgContainer" visible="false" class="d-flex w-100" style="height:520px;overflow:auto" onscroll="">
             <div class="spinner-border align-self-center" role="status" style="z-index:1;position:absolute">
               <span class="visually-hidden">Loading...</span>
             </div>
             <img id="graph" src="/api/graph?source={{source}}&aggregate={{ aggregate }}&step={{ step }}&lower={{ lower }}&upper={{ upper }}"
-              class="imgDocument align-self-start clear" alt="graph" style="z-index:2;position:relative" />
+              class="imgDocument clear" alt="graph" style="z-index:2;position:relative" />
           </div>
         </div>
+      </div>
+    </div>
+    <p/>
+    <div class="container w-50">
+      <div class="mb-3">
+        <form action="/graph-{{source}}" method="get">
+          <div class="input-group row-mb-4 align-items-center">
+            <label for="aggregateSelect" class="input-group-text ">Aggregate data by:&nbsp;</label>
+            <select id="aggregateSelect" name="aggregate" class="form-select" aria-label="Aggregate by">
+              <option selected value="">Nothing</option>
+              <option value="h">hour</option>
+              <option value="d">day</option>
+              <option value="w">week</option>
+              <option value="m">month</option>
+            </select>
+          </div>
+          <div class="input-group row-mb-4 align-items-center">
+            <label for="stepPicker" class="input-group-text ">Step size for x axis label:&nbsp;</label>
+            <div id="stepVal" class="input-group-text">{{step}}</div>
+            <input type="range" class="form-range form-control" name="step" value="{{step}}" min="1" max="30" id="stepPicker" onInput="document.getElementById('stepVal').textContent=(document.getElementById('stepPicker').value)">
+          </div>
+          <div class="input-group row-mb-4 align-items-center">
+            <i class="bi bi-calendar-date input-group-text col-md-2">Start date:</i>
+            <input id="lowerPicker" type="text" name="lower" value="{{lower}}" class="datepicker_input form-control col-md-10 clear" placeholder="Start date" required aria-label="Start date">
+          </div>
+          <div class="clear"/>
+          <div class="input-group row-mb-4 align-items-center">
+            <i class="bi bi-calendar-date input-group-text col-md-2">End date:</i>
+            <input id="upperPicker" type="text" name="upper" value="{{upper}}" class="datepicker_input form-control col-md-10 clear" placeholder="End date" required aria-label="End date">
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="this.form.submit(); this.disabled=true;">Submit</button>
+        </form>
       </div>
     </div>
   </div>
@@ -27,6 +59,26 @@
 
 {% block scripts %}
 <script type = "text/javascript">
+  const getDatePickerTitle = elem => {
+    // From the label or the aria-label
+    const label = elem.nextElementSibling;
+    let titleText = '';
+    if (label && label.tagName === 'LABEL') {
+      titleText = label.textContent;
+    } else {
+      titleText = elem.getAttribute('aria-label') || '';
+    }
+    return titleText;
+  }
+  
+  const elems = document.querySelectorAll('.datepicker_input');
+  for (const elem of elems) {
+    const datepicker = new Datepicker(elem, {
+      'format': 'yyyy-mm-dd', 
+      title: getDatePickerTitle(elem)
+    });
+  } 
+
   var imgContainerElement = document.getElementById('imgContainer')
   var imgElement = document.getElementById('graph')
   
@@ -34,6 +86,15 @@
     imgContainerElement.scrollBy((imgElement.width-imgContainerElement.offsetWidth)/2, 0)
   }
 
-  imgElement.onload = scrollCenter;
+  function selectSelect(){
+    document.getElementById("aggregateSelect").value="{{aggregate}}"
+  }
+
+  function init(){
+    scrollCenter()
+    selectSelect()
+  }
+
+  imgElement.onload = init;
 </script>
 {% endblock %}
