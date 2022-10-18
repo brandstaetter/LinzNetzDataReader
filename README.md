@@ -1,8 +1,3 @@
-# Python Template
-
-Should provide a start for new Python projects.
-This template contains a small, dummy FastAPI server.
-
 ## Local Setup
 
 ###	Requirements
@@ -59,6 +54,7 @@ See the [IDE Integration](./docs/ide_integration.md) documentation.
 ```shell
 # start the server
 uvicorn data_analyzer.main:app --port 8080
+# or simply run main.py
 ```
 
 ### Run tests and static code analysis
