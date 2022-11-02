@@ -1,3 +1,5 @@
+[![Docker App Image CI](https://github.com/brandstaetter/LinzNetzDataReader/actions/workflows/docker-app-image.yml/badge.svg)](https://github.com/brandstaetter/LinzNetzDataReader/actions/workflows/docker-app-image.yml)
+
 ## Local Setup
 
 ###	Requirements
