@@ -16,9 +16,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker-compose build dev
-    - name: run database server
-      run: docker-compose up -f docker/local-dev/docker-compose.yml -d
+    - name: Run Database Server
+      run: docker-compose -f ./data_analyzer/docker/local-dev/docker-compose.yml up -d
     - name: Run the Docker image
       run: docker-compose run dev
-    - name: shut down database server
-      run: docker-compose down -f docker/local-dev/docker-compose.yml
+    - name: Shut Down Database Server
+      run: docker-compose -f ./data_analyzer/docker/local-dev/docker-compose.yml down
