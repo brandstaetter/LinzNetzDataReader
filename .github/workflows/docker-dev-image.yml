@@ -17,8 +17,8 @@ jobs:
     - name: Build the Docker image
       run: docker-compose build dev
     - name: Run Database Server
-      run: docker-compose -f data_analyzer/docker/local-dev/docker-compose.yml up -d
+      run: docker-compose -f docker/local-dev/docker-compose.yml up -d
     - name: Run the Docker image
       run: docker-compose run dev
     - name: Shut Down Database Server
-      run: docker-compose -f data_analyzer/docker/local-dev/docker-compose.yml down
+      run: docker-compose -f docker/local-dev/docker-compose.yml down
