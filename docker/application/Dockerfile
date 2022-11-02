@@ -26,6 +26,8 @@ RUN apt-get update \
 
 RUN curl -sSL 'https://install.python-poetry.org' | python -
 
+RUN apt-get install -y libpq-dev
+
 WORKDIR /app/data_analyzer
 
 # create and activate virtual environment
