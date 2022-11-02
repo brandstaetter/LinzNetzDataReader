@@ -15,8 +15,6 @@ jobs:
        image: postgres:12.5
        env:
          POSTGRES_DB: dataanalyzer
-         POSTGRES_USER: dev
-         POSTGRES_PASSWORD: dev
        ports:
          # Maps tcp port 5432 on service container to the host
          - 5432:5432
@@ -31,6 +29,6 @@ jobs:
     - name: Build the Docker image
       run: docker-compose build dev
     - name: Run the Docker image
-      run: docker-compose run dev
+      run: docker-compose run -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres dev
         
 
