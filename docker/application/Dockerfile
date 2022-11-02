@@ -21,7 +21,7 @@ ENV \
 
 
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y curl libpq-dev\
+  && apt-get install --no-install-recommends -y curl libpq-dev build-essentials \
   && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sSL 'https://install.python-poetry.org' | python -
