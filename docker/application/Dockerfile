@@ -21,12 +21,10 @@ ENV \
 
 
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y curl \
+  && apt-get install --no-install-recommends -y curl libpq-dev\
   && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sSL 'https://install.python-poetry.org' | python -
-
-RUN apt-get install -y libpq-dev
 
 WORKDIR /app/data_analyzer
 
