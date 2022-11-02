@@ -1,7 +1,8 @@
 import pandas as pd
-from api.table_definition import CONSUMPTION, DATE, ENDDATE, FALLBACK
 from numpy import NaN
-from service.util.database_helper import D_TABLE_NAME, QH_TABLE_NAME
+
+from data_analyzer.api.table_definition import CONSUMPTION, DATE, ENDDATE, FALLBACK
+from data_analyzer.service.util.database_helper import D_TABLE_NAME, QH_TABLE_NAME
 
 CONSUMPTION_ALT = "Energiemenge in kWh"
 STARTDATE = "Datum von"

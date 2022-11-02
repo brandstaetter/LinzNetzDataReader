@@ -4,13 +4,14 @@ import tempfile
 
 import matplotlib.dates as mdates
 import numpy as np
-from api.table_definition import CONSUMPTION
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from pandas import DataFrame
-from service.data_services import get_frame
-from service.util.database_helper import D_TABLE_NAME, QH_TABLE_NAME
+
+from data_analyzer.api.table_definition import CONSUMPTION
+from data_analyzer.service.data_services import get_frame
+from data_analyzer.service.util.database_helper import D_TABLE_NAME, QH_TABLE_NAME
 
 templates = Jinja2Templates(directory=os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "templates")))
 graph_router = APIRouter()

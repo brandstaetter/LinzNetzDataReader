@@ -1,10 +1,11 @@
 import logging
 
 import pandas as pd
-from api.table_definition import CONSUMPTION, DATE, ENDDATE, FALLBACK
-from db.session import engine, insp
-from service.util.csv_reader import parse
-from service.util.database_helper import D_TABLE_NAME, QH_TABLE_NAME, table_from_filename
+
+from data_analyzer.api.table_definition import CONSUMPTION, DATE, ENDDATE, FALLBACK
+from data_analyzer.db.session import engine, insp
+from data_analyzer.service.util.csv_reader import parse
+from data_analyzer.service.util.database_helper import D_TABLE_NAME, QH_TABLE_NAME, table_from_filename
 
 
 def is_persist_csv(filename: str, csv_file_path: str) -> bool:

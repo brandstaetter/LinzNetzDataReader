@@ -1,11 +1,12 @@
 import logging
 
 import uvicorn
-from api.general_pages.route_frontend import general_pages_router
-from api.operations.route_graph import graph_router
-from api.operations.route_operations import operations_router
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+
+from data_analyzer.api.general_pages.route_frontend import general_pages_router
+from data_analyzer.api.operations.route_graph import graph_router
+from data_analyzer.api.operations.route_operations import operations_router
 
 # general setup and base configuration
 

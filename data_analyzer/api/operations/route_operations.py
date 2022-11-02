@@ -5,10 +5,11 @@ from os import path
 from typing import List, Optional
 
 import aiofiles
-from api.response_model import Message
 from fastapi import APIRouter, File, Request, Response, UploadFile
 from fastapi.templating import Jinja2Templates
-from service.data_services import is_persist_csv
+
+from data_analyzer.api.response_model import Message
+from data_analyzer.service.data_services import is_persist_csv
 
 templates = Jinja2Templates(directory=path.abspath(path.join(path.dirname(__file__), "..", "..", "templates")))
 operations_router = APIRouter()
