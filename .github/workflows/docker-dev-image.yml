@@ -31,6 +31,6 @@ jobs:
     - name: Build the Docker image
       run: docker-compose build dev
     - name: Run the Docker image
-      run: docker-compose run dev --env POSTGRES_SERVER=localhost
+      run: docker-compose run dev
         
 
