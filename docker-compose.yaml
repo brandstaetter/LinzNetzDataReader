@@ -6,7 +6,7 @@ services:
       dockerfile: ./docker/application/Dockerfile
       network: host
       target: app
-    image: example-application
+    image: linznetz-data-analyzer
     ports:
       - '8080:8080'
     environment:
@@ -22,10 +22,10 @@ services:
       dockerfile: ./docker/application/Dockerfile
       network: host
       target: dev
-    image: example-application-dev
+    image: linznetz-data-analyzer-dev
   pre-commit:
     build:
       context: .
       dockerfile: ./docker/pre-commit/Dockerfile
       network: host
-    image: example-application-pre-commmit
+    image: linznetz-data-analyzer-pre-commmit
