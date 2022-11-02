@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "LinzNetz Data Analyzer"
+name = "data_analyzer"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Hannes Brandstätter-Müller <hannes.mueller@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
