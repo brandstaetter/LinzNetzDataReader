@@ -85,3 +85,18 @@ docker-compose run dev
 docker-compose build pre-commit
 docker-compose run pre-commit
 ```
+
+### Run the database
+
+Create a .env file in the root of the project containing the following:
+```
+POSTGRES_USER=dev
+POSTGRES_PASSWORD=dev
+POSTGRES_SERVER=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=dataanalyzer
+```
+and run
+```
+docker-compose run -d postgres
+```
